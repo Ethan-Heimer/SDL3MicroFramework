@@ -1,7 +1,10 @@
 #include "errors.h"
+
+#include "SDL3/SDL.h"
 #include <iostream>
 
 void LogError(ERRORS error){
+    std::cout << "System Error:" << std::endl;
     switch(error){
         case ERRORS::SUCCSESS:
             std::cout << "Succsess" << std::endl;
@@ -19,8 +22,14 @@ void LogError(ERRORS error){
             std::cout << "TEXTURE ERROR: Image likely not found" << std::endl;
             break;
 
+        case ERRORS::SDL_INIT_ERROR:
+            std::cout << "SDL INIT ERROR: SDL failed to initialize" << std::endl;
+            break;
+
         default:
             std::cout << "Error Not Found" << std::endl;
             break;
     }
+
+    std::cout << "SDL says: " << SDL_GetError() << std::endl;
 }

@@ -6,7 +6,8 @@ enum ERRORS{
     SUCCSESS = 0, 
     WINDOW_NOT_INIT,
     RENDERER_NOT_INIT,
-    TEXTURE_ERROR
+    TEXTURE_ERROR,
+    SDL_INIT_ERROR
 };
 
 void LogError(ERRORS error);
