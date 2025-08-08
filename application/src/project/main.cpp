@@ -11,26 +11,26 @@
 #include "errors.h"
 #include "renderobject.h"
 
+void Play(ERRORS& errors);
+
 int main(int argc, char* argv[]){
     ERRORS errors;
+    std::cout << "Trying to play" << std::endl;
 
-    errors = Application::Init();
-    if(errors != ERRORS::SUCCSESS){
-        LogError(errors);            
-        return errors;
-    }
+    Application::Init(errors);
+    LogError(errors);            
 
-    errors = Application::Run();
-    if(errors != ERRORS::SUCCSESS){
-        LogError(errors);            
-        return errors;
-    } 
+    Play(errors);
+    LogError(errors);            
 
-    errors = Application::Shutdown();
-    if(errors != ERRORS::SUCCSESS){
-        LogError(errors);            
-        return errors;
-    }
+    Application::Shutdown(errors);
+    LogError(errors);            
 
     return 0;
+}
+
+void Play(ERRORS& errors){
+    if(errors == ERRORS::SUCCSESS){
+        Application::Run(errors);
+    }
 }

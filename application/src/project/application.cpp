@@ -7,31 +7,27 @@
 #include "renderobject.h"
 #include "TextureManager.h"
 
-ERRORS Application::Init(){
-    ERRORS error;
+void Application::Init(ERRORS& errors){
     //Initializes video
     bool init = SDL_Init(SDL_INIT_VIDEO);
 
-    if(!init){
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, 
-                "Couldn't initialize SDL: %s", SDL_GetError());
-        return ERRORS::SDL_INIT_ERROR;
+    if(!init){ 
+        errors = ERRORS::SDL_INIT_ERROR;
+        return;
     } 
 
-    error = WindowManager::Init();
-    if(error != ERRORS::SUCCSESS){
-        return error;
+    errors = WindowManager::Init();
+    if(errors != ERRORS::SUCCSESS){
+        return;
     }
 
-    error = RenderManager::Init();
-    if(error != ERRORS::SUCCSESS){
-        return error;
+    errors = RenderManager::Init();
+    if(errors != ERRORS::SUCCSESS){
+        return;
     }
-
-    return ERRORS::SUCCSESS;
 }
 
-ERRORS Application::Run(){
+void Application::Run(ERRORS& errors){
     std::vector<RenderObject> objects; 
 
     SDL_Renderer* renderer = RenderManager::GetRenderer(); 
@@ -72,15 +68,12 @@ ERRORS Application::Run(){
         
         RenderManager::RendererEnd();
     } 
-
-    return ERRORS::SUCCSESS;
 }
 
-ERRORS Application::Shutdown(){
+void Application::Shutdown(ERRORS& errors){
     RenderManager::Shutdown();
     WindowManager::Shutdown();
 
     SDL_Quit();
-
-    return ERRORS::SUCCSESS;
+    errors = ERRORS::SUCCSESS;
 }

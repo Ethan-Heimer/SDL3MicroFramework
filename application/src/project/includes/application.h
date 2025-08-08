@@ -4,9 +4,9 @@
 #include "errors.h"
 class Application{
     public:
-        static ERRORS Init();
-        static ERRORS Run();
-        static ERRORS Shutdown();
+        static void Init(ERRORS& errors);
+        static void Run(ERRORS& errors);
+        static void Shutdown(ERRORS& errors);
 };
 
 #endif

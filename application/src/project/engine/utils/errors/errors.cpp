@@ -4,6 +4,9 @@
 #include <iostream>
 
 void LogError(ERRORS error){
+    if(error == ERRORS::SUCCSESS)
+        return;
+    
     std::cout << "System Error:" << std::endl;
     switch(error){
         case ERRORS::SUCCSESS:
