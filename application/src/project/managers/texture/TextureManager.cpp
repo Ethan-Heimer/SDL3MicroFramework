@@ -1,6 +1,6 @@
 #include "TextureManager.h"
 #include <iostream>
-#include "../render/RendererManager.h"
+#include "RendererManager.h"
 
 #include "SDL3_image/SDL_image.h"
 

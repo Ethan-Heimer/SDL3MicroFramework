@@ -1,5 +1,5 @@
 #include "RendererManager.h"
-#include "../window/WindowManager.h"
+#include "WindowManager.h"
 
 #include <iostream>
 

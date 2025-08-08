@@ -2,10 +2,10 @@
 #include <vector>
 
 #include "application.h"
-#include "managers/window/WindowManager.h"
-#include "managers/render/RendererManager.h"
-#include "objects/renderobjects/renderobject.h"
-#include "managers/texture/TextureManager.h"
+#include "WindowManager.h"
+#include "RendererManager.h"
+#include "renderobject.h"
+#include "TextureManager.h"
 
 ERRORS Application::Init(){
     ERRORS error;

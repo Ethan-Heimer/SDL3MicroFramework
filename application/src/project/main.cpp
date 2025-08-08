@@ -5,11 +5,11 @@
 #include <vector>
 
 #include "application.h"
-#include "managers/window/WindowManager.h"
-#include "managers/render/RendererManager.h"
-#include "managers/texture/TextureManager.h"
-#include "utils/errors/errors.h"
-#include "objects/renderobjects/renderobject.h"
+#include "WindowManager.h"
+#include "RendererManager.h"
+#include "TextureManager.h"
+#include "errors.h"
+#include "renderobject.h"
 
 int main(int argc, char* argv[]){
     ERRORS errors;

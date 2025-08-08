@@ -1,7 +1,7 @@
 #ifndef APPLICATION
 #define APPLICATION 
 
-#include "utils/errors/errors.h"
+#include "errors.h"
 class Application{
     public:
         static ERRORS Init();

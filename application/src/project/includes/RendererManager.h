@@ -2,7 +2,7 @@
 #define RENDER_MANAGER
 
 #include "SDL3/SDL.h"
-#include "../../utils/errors/errors.h"
+#include "errors.h"
 
 class RenderManager{
     public:

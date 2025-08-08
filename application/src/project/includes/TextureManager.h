@@ -5,7 +5,7 @@
 #include <string>
 
 #include "SDL3/SDL.h"
-#include "../../utils/errors/errors.h"
+#include "errors.h"
 
 using namespace std;
 

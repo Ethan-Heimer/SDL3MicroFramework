@@ -45,6 +45,7 @@ message("Linking SDL Libs")
 
 target_include_directories(${NAME} PRIVATE ./src/external/SDL3/include)
 target_include_directories(${NAME} PRIVATE ./src/external/SDL3image/include)
+target_include_directories(${NAME} PRIVATE ./src/project/includes)
 
 target_link_libraries(${NAME} PRIVATE SDL3::SDL3)
 target_link_libraries(${NAME} PRIVATE SDL3_image::SDL3_image)
