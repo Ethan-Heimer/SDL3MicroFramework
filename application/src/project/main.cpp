@@ -25,8 +25,6 @@ int main(int argc, char* argv[]){
 
     Application::Shutdown(errors);
     LogError(errors);            
-
-    return 0;
 }
 
 void Play(ERRORS& errors){

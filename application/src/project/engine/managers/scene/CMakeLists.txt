@@ -1,3 +1,4 @@
 target_sources("NewProject" PRIVATE
-  renderobject.cpp
+  Scene.cpp
+  SceneManager.cpp
 )
