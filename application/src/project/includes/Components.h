@@ -3,12 +3,16 @@
 
 #include <concepts>
 
+class GameObject;
 class Component{
     public:
+        friend class GameObject;
+
         virtual void Start(){};
         virtual void Update(){};
         
         virtual ~Component(){};
+        GameObject* gameObject;
 };
 
 template <typename T>

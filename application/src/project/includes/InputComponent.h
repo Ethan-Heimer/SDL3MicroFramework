@@ -5,6 +5,9 @@
 class InputComponent : public Component{
     public:
         void Update() override;
+        void SetSpeed(float speed);
+    private:
+        float speed;
 };
 
 #endif

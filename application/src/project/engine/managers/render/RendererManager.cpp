@@ -1,9 +1,12 @@
 #include "RendererManager.h"
 #include "WindowManager.h"
+#include "SceneManager.h"
 
 #include <iostream>
 
 SDL_Renderer* RenderManager::renderer = NULL;
+SDL_FPoint RenderManager::pivot{0, 0};
+SDL_FlipMode RenderManager::flip = SDL_FLIP_NONE; 
 
 ERRORS RenderManager::Init(){
     SDL_Window* window = WindowManager::GetWindow();
@@ -22,8 +25,25 @@ ERRORS RenderManager::Init(){
     return ERRORS::SUCCSESS;
 }
 
-SDL_Renderer* RenderManager::GetRenderer(){
-    return renderer;
+void RenderManager::Render(){
+    Scene* currentScene = SceneManager::GetCurrentScene();
+    if(currentScene == nullptr)
+        return; 
+
+    RenderManager::RendererStart();                    
+    currentScene->ForeachGameobject(RenderGameObject);
+    RenderManager::RendererEnd();
+}
+
+void RenderManager::RenderGameObject(const GameObject& gameobject){
+    RenderObject* renderObject = gameobject.GetRenderObject();
+
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, renderObject->GetSurface());
+    SDL_FRect* rect = renderObject->GetRect();
+    double angle = renderObject->GetAngle();
+
+    SDL_RenderTextureRotated(renderer, texture, NULL, rect, angle, &pivot, flip);
+    SDL_DestroyTexture(texture);
 }
 
 void RenderManager::RendererStart(){
@@ -38,3 +58,8 @@ void RenderManager::RendererEnd(){
 void RenderManager::Shutdown(){
     SDL_DestroyRenderer(renderer);
 }
+
+SDL_Renderer* RenderManager::GetRenderer(){
+    return renderer;
+}
+

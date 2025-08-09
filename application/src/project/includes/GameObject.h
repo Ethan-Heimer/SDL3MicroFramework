@@ -43,24 +43,19 @@ class GameObject{
         T* AddComponent(){
             T* component = new T();   
             components.push_back(component);
+
+            component->gameObject = this;
             component->Start();
 
             return component;
         }
 
-        /*
-        template<ComponentBase T>
-        T& GetComponent(){
-            for(auto& o : components){
-                const std::type_info& componentType = typeid(o);      
-                const std::type_info& checkType = typeid(T);
-
-                if(componentType == checkType)
-                    return o;
-            }
+        void Move(float x, float y){
+            auto* rect = this->renderObject->GetRect();
+            rect->x += x;
+            rect->y += y;
         }
-        */
-            
+     
     private:
         RenderObject* renderObject;
         std::vector<Component*> components;

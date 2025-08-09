@@ -3,6 +3,7 @@
 
 #include "SDL3/SDL.h"
 #include "errors.h"
+#include "GameObject.h"
 
 class RenderManager{
     public:
@@ -11,10 +12,13 @@ class RenderManager{
         static void Shutdown(); 
 
         static void RendererStart();
-        //Render Object
+        static void Render();
         static void RendererEnd();
     private:
+        static void RenderGameObject(const GameObject& gameobject);
         static SDL_Renderer* renderer;
+        static SDL_FPoint pivot;
+        static SDL_FlipMode flip;
 };
 
 #endif
