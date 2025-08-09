@@ -29,3 +29,7 @@ void SceneManager::DeallocateScenes(){
         std::cout << "Deallocated Scene: " << pair.first << std::endl;
     }
 }
+
+void SceneManager::InvokeSceneUpdate(){
+   currentScene->InvokeGameobjectsUpdate(); 
+}

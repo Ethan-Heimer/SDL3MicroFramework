@@ -1,9 +1,11 @@
 #ifndef GAME_OBJECT
 #define GAME_OBJECT
 
+#include "Components.h"
 #include "renderobject.h"
-#include <cwchar>
-#include <utility>
+#include <type_traits>
+#include <typeinfo>
+#include <vector>
 
 class GameObject{
     public:
@@ -24,14 +26,51 @@ class GameObject{
         
         ~GameObject(){
             delete renderObject;
+            FreeComponents();
         }
 
         RenderObject* GetRenderObject() const {
             return renderObject;
         }
+
+        void InvokeComponentsUpdate(){
+            for(auto& o : components){
+                o->Update();
+            }
+        }
+
+        template<ComponentBase T>
+        T* AddComponent(){
+            T* component = new T();   
+            components.push_back(component);
+            component->Start();
+
+            return component;
+        }
+
+        /*
+        template<ComponentBase T>
+        T& GetComponent(){
+            for(auto& o : components){
+                const std::type_info& componentType = typeid(o);      
+                const std::type_info& checkType = typeid(T);
+
+                if(componentType == checkType)
+                    return o;
+            }
+        }
+        */
             
     private:
         RenderObject* renderObject;
+        std::vector<Component*> components;
+
+        void FreeComponents(){
+            for(auto o : components){
+                delete o;
+            }
+            std::cout << "Free Component" << std::endl;
+        }
 };
 
 #endif

@@ -1,3 +1,4 @@
+#include "InputComponent.h"
 #include "SDL3/SDL.h"
 #include <vector>
 
@@ -49,11 +50,13 @@ void Application::Init(ERRORS& errors){
     TextureManager::GetTexture("./assets/Dog.jpeg", surface1);
     TextureManager::GetTexture("./assets/Avery.jpg", surface2);
 
-    sceneOne->CreateGameObject(surface1, 0, 0);
+    GameObject* gameObject = sceneOne->CreateGameObject(surface1, 0, 0);
     sceneOne->CreateGameObject(surface2, 200, 100);
 
     sceneTwo->CreateGameObject(surface1, 500, 300);
     sceneTwo->CreateGameObject(surface2, 200, 210);
+
+    gameObject->AddComponent<InputComponent>();
 
     SceneManager::LoadScene("Test Scene");
 }
@@ -77,6 +80,8 @@ void Application::Run(ERRORS& errors){
         Scene* currentScene = SceneManager::GetCurrentScene();
         if(currentScene == nullptr)
             return;
+
+        SceneManager::InvokeSceneUpdate();
 
         auto renderObject = [renderer, pivot, flip](const GameObject& object){
             RenderGameObject(renderer, pivot, flip, object);

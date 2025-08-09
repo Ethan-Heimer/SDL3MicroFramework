@@ -23,6 +23,12 @@ void Scene::FreeGameobject(){
     }
 }
 
+void Scene::InvokeGameobjectsUpdate(){
+    for(auto& o : gameObjects){
+        o->InvokeComponentsUpdate();
+    }
+}
+
 Scene::~Scene(){
     FreeGameobject();
 }

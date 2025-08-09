@@ -13,11 +13,14 @@ using namespace std;
 
 class Scene{
     public:
+        friend class SceneManager;  
+
         GameObject* CreateGameObject(SDL_Surface* surface, float x, float y);
         void ForeachGameobject(std::function<void(const GameObject& gameobject)> callback);
 
         ~Scene();
     private: 
+        void InvokeGameobjectsUpdate();
         void FreeGameobject();
         vector<GameObject*> gameObjects;
 };
@@ -30,6 +33,8 @@ class SceneManager{
         static Scene* GetCurrentScene();
 
         static void DeallocateScenes();
+
+        static void InvokeSceneUpdate();
 
     private:
         static Scene* currentScene;
